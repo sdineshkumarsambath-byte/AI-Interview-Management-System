@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Interview Completed</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.container{
+    width:500px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0px 10px 30px rgba(0,0,0,0.2);
+}
+
+.icon{
+    font-size:80px;
+    margin-bottom:15px;
+}
+
+h1{
+    color:#2c3e50;
+    margin-bottom:10px;
+}
+
+.message{
+    color:#666;
+    margin-bottom:25px;
+}
+
+.score-box{
+    background:#f5f7fa;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+.score-box p{
+    margin:10px 0;
+    font-size:18px;
+}
+
+.badge{
+    padding:6px 12px;
+    border-radius:20px;
+    color:white;
+    font-weight:bold;
+}
+
+.excellent{
+    background:#2ecc71;
+}
+
+.good{
+    background:#3498db;
+}
+
+.average{
+    background:#f39c12;
+}
+
+.low{
+    background:#e74c3c;
+}
+
+.selected{
+    color:#27ae60;
+    font-weight:bold;
+}
+
+.rejected{
+    color:#e74c3c;
+    font-weight:bold;
+}
+
+.btn{
+    display:inline-block;
+    margin:10px;
+    padding:12px 22px;
+    text-decoration:none;
+    color:white;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.home-btn{
+    background:#00b894;
+}
+
+.home-btn:hover{
+    background:#019875;
+}
+
+.result-btn{
+    background:#0984e3;
+}
+
+.result-btn:hover{
+    background:#0767b1;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="icon">🎉</div>
+
+    <h1>Interview Submitted Successfully</h1>
+
+    <p class="message">
+        Congratulations! Your interview answers have been submitted successfully.
+    </p>
+
+    <div class="score-box">
+
+        <p>
+            <strong>Score:</strong>
+            {{ score }}
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+
+            {% if status == "Selected" %}
+                <span class="selected">{{ status }}</span>
+            {% else %}
+                <span class="rejected">{{ status }}</span>
+            {% endif %}
+        </p>
+
+        <p>
+            <strong>Performance:</strong>
+
+            {% if performance == "Excellent" %}
+                <span class="badge excellent">Excellent</span>
+
+            {% elif performance == "Good" %}
+                <span class="badge good">Good</span>
+
+            {% elif performance == "Average" %}
+                <span class="badge average">Average</span>
+
+            {% else %}
+                <span class="badge low">Low</span>
+            {% endif %}
+        </p>
+
+    </div>
+
+    <a href="{% url 'home' %}" class="btn home-btn">
+        🏠 Go To Home
+    </a>
+
+    <a href="{% url 'final_result' session_id %}" class="btn result-btn">
+        📊 View Result
+    </a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Interview Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background: #f8fafc;
+}
+
+/* HEADER */
+
+body{
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI',sans-serif;
+    background:
+    linear-gradient(rgba(248,250,252,.95),rgba(248,250,252,.95)),
+    url('/static/images/office-bg.jpg');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+.header{
+    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
+    color:white;
+    padding:40px 20px;
+    text-align:center;
+    box-shadow:0 4px 20px rgba(0,0,0,.15);
+}
+
+.header h1{
+    font-size:42px;
+    font-weight:700;
+}
+
+.header p{
+    margin-top:10px;
+    color:#cbd5e1;
+    font-size:18px;
+}
+/* CONTAINER */
+
+.container{
+    width:90%;
+    margin:auto;
+    margin-top:30px;
+}
+
+/* STATS */
+
+.stats{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    margin-bottom:40px;
+}
+
+.stat-card{
+    width:280px;
+    padding:25px;
+    border-radius:15px;
+    color:white;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+.stat-card h3{
+    font-size:18px;
+}
+
+.stat-card h1{
+    margin-top:10px;
+    font-size:42px;
+}
+
+.blue{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+}
+
+.green{
+    background:linear-gradient(135deg,#059669,#047857);
+}
+
+.orange{
+    background:linear-gradient(135deg,#f59e0b,#d97706);
+}
+
+.red{
+    background:linear-gradient(135deg,#dc2626,#b91c1c);
+}
+
+/* MENU */
+
+.menu{
+    display:flex;
+    justify-content:center;
+    align-items:stretch;
+    gap:20px;
+    margin-bottom:40px;
+
+}
+
+.card{
+    width:250px; /* 300 -> 250 */
+
+    background:#ffffff;
+
+    border-radius:16px;
+    padding:20px;
+
+    text-align:center;
+
+    border:1px solid #e2e8f0;
+
+    box-shadow:0 5px 20px rgba(15,23,42,.08);
+
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+.card h3{
+    color:#0f172a;
+    margin-bottom:10px;
+    font-size:22px;
+}
+
+.card p{
+    color:#64748b;
+    margin-bottom:15px;
+    line-height:1.5;
+}
+
+.btn{
+    display:inline-block;
+    padding:10px 18px;
+    background:#3498db;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+}
+
+.btn:hover{
+    background:#2980b9;
+}
+
+.logout{
+    background:#e74c3c;
+}
+
+.logout:hover{
+    background:#c0392b;
+}
+
+/* FOOTER */
+
+.footer{
+    margin-top:50px;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    padding:25px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    border-top:3px solid #38bdf8;
+}
+.footer{
+    margin-top:60px;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    padding:30px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    border-top:4px solid #38bdf8;
+}
+
+.footer-box{
+    color:white;
+    text-align:center;
+    padding:20px;
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:12px;
+    background:rgba(255,255,255,0.05);
+    transition:0.3s;
+}
+
+.footer-box:hover{
+    transform:translateY(-5px);
+    border-color:#38bdf8;
+    box-shadow:0 5px 15px rgba(56,189,248,0.3);
+}
+
+.footer-box h3{
+    margin-bottom:12px;
+    color:#38bdf8;
+    font-size:20px;
+}
+
+.footer-box p{
+    margin:6px 0;
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+@media(max-width:900px){
+    .footer{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .footer{
+        grid-template-columns:1fr;
+    }
+}
+.copyright{
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:15px;
+    font-size:15px;
+    border-top:1px solid rgba(255,255,255,0.1);
+}
+
+.candidate-guide{
+    margin-top:50px;
+    text-align:center;
+}
+
+.candidate-guide h2{
+    color:#0f172a;
+    margin-bottom:30px;
+    font-size:32px;
+}
+
+.guide-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.guide-box{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    transition:.3s;
+}
+
+.guide-box:hover{
+    transform:translateY(-5px);
+}
+
+.guide-box h3{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.guide-box p{
+    color:#64748b;
+    line-height:1.6;
+}
+
+.instruction-section{
+    margin-top:20px;
+    margin-bottom:30px;
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+.instruction-header h2{
+    font-size:32px;
+    font-weight:700;
+    color:#0f172a;
+    margin-bottom:12px;
+    text-align:center;
+}
+
+.instruction-header h2{
+    font-size:34px;
+    font-weight:700;
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+.instruction-header p{
+    text-align:center;
+    color:#64748b;
+    font-size:17px;
+    margin-bottom:20px;
+}
+
+.instruction-content{
+    background:white;
+    padding:15px 25px;
+    border-radius:18px;
+    border-top:4px solid #2563eb;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.instruction-content ul{
+    list-style:none;
+    padding:0;
+}
+
+.instruction-content li{
+    padding:8px 0;
+    border-bottom:1px solid #e2e8f0;
+    color:#334155;
+    font-size:15px;
+    line-height:1.4;
+}
+
+.instruction-content li:last-child{
+    border-bottom:none;
+}
+
+.instruction-content li::before{
+    content:"✓";
+    color:#2563eb;
+    font-weight:bold;
+    margin-right:12px;
+}
+.start-card{
+    background:linear-gradient(135deg,#dcfce7,#bbf7d0);
+    border:1px solid #8def86;
+}
+
+.logout-card{
+    background:linear-gradient(135deg,#ffedd5,#fed7aa);
+    border:1px solid #fd7474;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>AI Interview Management System</h1>
+    <p>Smart Resume Screening & AI Interview Platform</p>
+</div>
+
+<div class="container">
+
+    <!-- ADMIN DASHBOARD -->
+    {% if request.session.role == "admin" %}
+
+    <div class="stats">
+
+        <div class="stat-card blue">
+            <h3>Total Candidates</h3>
+            <h1>{{ total_candidates }}</h1>
+        </div>
+
+        <div class="stat-card green">
+            <h3>Total Interviews</h3>
+            <h1>{{ total_interviews }}</h1>
+        </div>
+
+        <div class="stat-card orange">
+            <h3>Selected</h3>
+            <h1>{{ selected }}</h1>
+        </div>
+
+        <div class="stat-card red">
+            <h3>Rejected</h3>
+            <h1>{{ rejected }}</h1>
+        </div>
+
+        <div class="stat-card blue">
+            <h3>Selection Rate</h3>
+            <h1>
+                {% if total_interviews > 0 %}
+                    {% widthratio selected total_interviews 100 %}%
+                {% else %}
+                    0%
+                {% endif %}
+            </h1>
+        </div>
+
+        <div class="stat-card green">
+            <h3>Certificates Issued</h3>
+            <h1>{{ selected }}</h1>
+        </div>
+
+    </div>
+
+    <!-- ADMIN MENU -->
+    <div class="menu">
+
+        <div class="card">
+            <h3>👨‍💼 Candidate List</h3>
+            <p>View all registered candidates.</p>
+            <a href="{% url 'candidate_list' %}" class="btn">View Candidates</a>
+        </div>
+
+        <div class="card">
+            <h3>➕ Add Candidate</h3>
+            <p>Add new candidate details.</p>
+            <a href="{% url 'add_candidate' %}" class="btn">Add Candidate</a>
+        </div>
+
+        <div class="card">
+            <h3>📊 Interview Results</h3>
+            <p>View completed interview reports.</p>
+            <a href="{% url 'interview_results' %}" class="btn">View Results</a>
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- USER DASHBOARD -->
+    {% if request.session.role == "user" %}
+
+    <div class="menu">
+
+    <div class="card start-card">
+        <h3>📄 Start Interview</h3>
+        <p>Upload Resume and begin AI Interview.</p>
+        <a href="{% url 'upload_resume' %}" class="btn">Start Interview</a>
+    </div>
+
+    <div class="card logout-card">
+        <h3>🚪 Logout</h3>
+        <p>Exit from AI Interview System.</p>
+        <a href="/" class="btn logout">Logout</a>
+    </div>
+
+</div>
+
+    <!-- USER INSTRUCTIONS -->
+    <div class="instruction-section">
+
+        <div class="instruction-header">
+            <h2>Interview Guidelines</h2>
+            <p>Please read carefully before starting your interview.</p>
+        </div>
+
+        <div class="instruction-content">
+            <ul>
+                <li>Upload a valid and updated resume.</li>
+                <li>Ensure stable internet connection.</li>
+                <li>Read questions carefully before answering.</li>
+                <li>Give honest and professional answers.</li>
+                <li>Do not refresh or close browser during interview.</li>
+                <li>AI will evaluate your responses automatically.</li>
+                <li>High scoring candidates may receive certificates.</li>
+            </ul>
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+
+    <div class="footer-box">
+        <h3>AI Interview System</h3>
+        <p>Smart Resume Screening & AI Interview Platform</p>
+    </div>
+
+    <div class="footer-box">
+        <h3>Quick Links</h3>
+        <p>Dashboard</p>
+        <p>Candidates</p>
+        <p>Results</p>
+    </div>
+
+    <div class="footer-box">
+        <h3>System Info</h3>
+        <p>Version 1.0</p>
+        <p>AI Powered Recruitment</p>
+    </div>
+
+    <div class="footer-box">
+        <h3>Developer</h3>
+        <p>Dinesh Kumar</p>
+    </div>
+
+</footer>
+
+<div class="copyright">
+    © 2026 AI Interview Management System | All Rights Reserved
+</div>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Interview Assessment Report</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#4e54c8,#8f94fb);
+    padding:20px;
+}
+
+.card{
+    width:700px;
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0px 10px 30px rgba(0,0,0,0.25);
+}
+
+.header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.icon{
+    font-size:70px;
+}
+
+.header h1{
+    color:#2c3e50;
+    margin-top:10px;
+}
+
+.header p{
+    color:#666;
+}
+
+.result-box{
+    background:#f8f9fa;
+    padding:20px;
+    border-radius:12px;
+    margin-top:20px;
+}
+
+.result-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #ddd;
+}
+
+.result-row:last-child{
+    border-bottom:none;
+}
+
+.label{
+    font-weight:bold;
+    color:#2c3e50;
+}
+
+.score{
+    font-size:26px;
+    font-weight:bold;
+    color:#3498db;
+}
+
+.selected{
+    color:#27ae60;
+    font-weight:bold;
+}
+
+.rejected{
+    color:#e74c3c;
+    font-weight:bold;
+}
+
+.badge{
+    padding:6px 15px;
+    border-radius:20px;
+    color:white;
+    font-weight:bold;
+}
+
+.excellent{
+    background:#2ecc71;
+}
+
+.good{
+    background:#3498db;
+}
+
+.average{
+    background:#f39c12;
+}
+
+.low{
+    background:#e74c3c;
+}
+
+.feedback{
+    margin-top:25px;
+    background:#eef6ff;
+    padding:15px;
+    border-radius:10px;
+}
+
+.feedback h3{
+    margin-bottom:10px;
+    color:#2c3e50;
+}
+
+.answers{
+    margin-top:25px;
+    background:#fafafa;
+    padding:15px;
+    border-radius:10px;
+    max-height:250px;
+    overflow-y:auto;
+    border:1px solid #ddd;
+}
+
+.answers h3{
+    margin-bottom:10px;
+    color:#2c3e50;
+}
+
+.btn-container{
+    text-align:center;
+    margin-top:25px;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 22px;
+    text-decoration:none;
+    color:white;
+    border-radius:8px;
+    font-weight:bold;
+    margin:5px;
+}
+
+.home-btn{
+    background:#00b894;
+}
+
+.home-btn:hover{
+    background:#019875;
+}
+
+.certificate-btn{
+    background:#6c5ce7;
+}
+
+.certificate-btn:hover{
+    background:#5649c9;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="header">
+
+        {% if status == "Selected" %}
+            <div class="icon">🏆</div>
+        {% else %}
+            <div class="icon">📋</div>
+        {% endif %}
+
+        <h1>Interview Assessment Report</h1>
+        <p>AI Generated Interview Evaluation</p>
+
+    </div>
+
+    <div class="result-box">
+
+        <div class="result-row">
+            <span class="label">Interview Score</span>
+            <span class="score">{{ score }}/100</span>
+        </div>
+
+        <div class="result-row">
+            <span class="label">Selection Status</span>
+
+            {% if status == "Selected" %}
+                <span class="selected">✅ Selected</span>
+            {% else %}
+                <span class="rejected">❌ Rejected</span>
+            {% endif %}
+        </div>
+
+        <div class="result-row">
+            <span class="label">Performance Rating</span>
+
+            {% if performance == "Excellent" %}
+                <span class="badge excellent">Excellent</span>
+
+            {% elif performance == "Good" %}
+                <span class="badge good">Good</span>
+
+            {% elif performance == "Average" %}
+                <span class="badge average">Average</span>
+
+            {% else %}
+                <span class="badge low">Needs Improvement</span>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="feedback">
+
+        <h3>AI Feedback</h3>
+
+        {% if performance == "Excellent" %}
+            <p>
+                Outstanding performance. Strong technical knowledge and communication skills.
+            </p>
+
+        {% elif performance == "Good" %}
+            <p>
+                Good performance. Candidate demonstrated solid understanding of concepts.
+            </p>
+
+        {% elif performance == "Average" %}
+            <p>
+                Average performance. Further preparation is recommended.
+            </p>
+
+        {% else %}
+            <p>
+                Improvement needed in technical and communication skills.
+            </p>
+        {% endif %}
+
+    </div>
+
+    {% if answers %}
+    <div class="answers">
+
+        <h3>Interview Responses</h3>
+
+        <pre>{{ answers }}</pre>
+
+    </div>
+    {% endif %}
+
+    <div class="btn-container">
+
+        <a href="{% url 'home' %}" class="btn home-btn">
+            🏠 Dashboard
+        </a>
+
+        {% if status == "Selected" %}
+        <a href="{% url 'download_certificate' session_id %}"
+           class="btn certificate-btn">
+            📜 Download Certificate
+        </a>
+        {% endif %}
+
+
+    </div>
+
+</div>
+
+{% if status == "Selected" %}
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+confetti({
+    particleCount: 250,
+    spread: 120,
+    origin: { y: 0.6 }
+});
+</script>
+{% endif %}
+
+</body>
+</html>
