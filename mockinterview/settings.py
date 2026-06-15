@@ -25,7 +25,6 @@ SECRET_KEY = 'django-insecure-vq2rb&vh+o0)dx$(5)$v-ji3f...'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 # =========================
 # APPLICATIONS
 # =========================
@@ -130,3 +129,4 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # API KEYS (GEMINI)
 # =========================
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+STATIC_ROOT = BASE_DIR / 'staticfiles'
