@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Candidate</title>
+</head>
+<body>
+
+<h2>✏️ Modify Candidate</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <p>Name</p>
+    <input type="text" name="name" value="{{ candidate.name }}">
+
+    <p>Email</p>
+    <input type="email" name="email" value="{{ candidate.email }}">
+
+    <p>Department</p>
+    <input type="text" name="department" value="{{ candidate.department }}">
+
+    <p>Skills</p>
+    <textarea name="skills">{{ candidate.skills }}</textarea>
+
+    <br><br>
+
+    <button type="submit">
+        Update Candidate
+    </button>
+
+</form>
+
+</body>
+</html>

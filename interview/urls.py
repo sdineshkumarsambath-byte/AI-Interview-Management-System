@@ -44,5 +44,21 @@ urlpatterns = [
     views.delete_interview_result,
     name='delete_interview_result'
 ),
+    
+    path(
+    'candidate/edit/<int:id>/',
+    views.edit_candidate,
+    name='edit_candidate'
+),
+    path(
+    'result/edit/<int:id>/',
+    views.edit_result,
+    name='edit_result'
+),
 
+path(
+    'my-result/',
+    views.my_result,
+    name='my_result'
+),
 ]

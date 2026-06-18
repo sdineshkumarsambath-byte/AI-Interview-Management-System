@@ -170,6 +170,15 @@ body{
 .certificate-btn:hover{
     background:#5649c9;
 }
+.modify-btn{
+    background:#f39c12;
+    color:white;
+}
+
+.modify-btn:hover{
+    background:#d68910;
+}
+
 
 </style>
 
@@ -267,19 +276,20 @@ body{
 
     <div class="btn-container">
 
-        <a href="{% url 'home' %}" class="btn home-btn">
-            🏠 Dashboard
-        </a>
+    <a href="{% url 'home' %}" class="btn home-btn">
+        🏠 Dashboard
+    </a>
 
-        {% if status == "Selected" %}
-        <a href="{% url 'download_certificate' session_id %}"
-           class="btn certificate-btn">
-            📜 Download Certificate
-        </a>
-        {% endif %}
+    
 
+    {% if status == "Selected" %}
+    <a href="{% url 'download_certificate' session_id %}"
+       class="btn certificate-btn">
+        📜 Download Certificate
+    </a>
+    {% endif %}
 
-    </div>
+</div>
 
 </div>
 

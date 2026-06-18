@@ -1,3 +1,5 @@
+from urllib import request
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.core.mail import send_mail
@@ -22,6 +24,9 @@ import os
 
 from datetime import datetime
 from django.shortcuts import get_object_or_404, redirect
+from .models import InterviewSession
+
+from django.shortcuts import render
 from .models import InterviewSession
 
 
@@ -296,7 +301,10 @@ def start_interview(request, resume_id):
         id=resume_id
     )
 
-    # Auto Add Candidate
+    # Save candidate email in session
+    
+    request.session.modified = True
+
     Candidate.objects.get_or_create(
         name=resume.name,
         defaults={
@@ -654,3 +662,72 @@ def delete_interview_result(request, session_id):
     session.delete()
     return redirect('interview_results')
 
+def edit_candidate(request, id):
+
+    candidate = get_object_or_404(
+        Candidate,
+        id=id
+    )
+
+    if request.method == "POST":
+
+        candidate.name = request.POST.get("name")
+        candidate.email = request.POST.get("email")
+        candidate.department = request.POST.get("department")
+        candidate.skills = request.POST.get("skills")
+
+        candidate.save()
+
+        return redirect("candidate_list")
+
+    return render(
+        request,
+        "edit_candidate.html",
+        {"candidate": candidate}
+    )
+    
+def edit_result(request, id):
+
+    result = get_object_or_404(
+        InterviewSession,
+        id=id
+    )
+
+    if request.method == "POST":
+
+        print(request.POST)
+
+        # Score & Status Update
+        result.score = request.POST.get("score")
+        result.status = request.POST.get("status")
+
+        # Candidate Name Update
+        result.resume.name = request.POST.get("candidate_name")
+
+        result.resume.save()
+        result.save()
+
+        return redirect("interview_results")
+
+    return render(
+        request,
+        "edit_result.html",
+        {"result": result}
+    )
+    
+def my_result(request):
+
+    email = request.session.get("email")
+
+    if not email:
+        return render(request, "my_result.html", {
+            "error": "Please login first"
+        })
+
+    result = InterviewSession.objects.filter(
+        resume__email=email
+    ).order_by("-id").first()
+
+    return render(request, "my_result.html", {
+        "result": result
+    })

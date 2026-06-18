@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Interview Result</title>
+</head>
+<body>
+
+<h2>✏️ Modify Interview Result</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <p>Candidate Name</p>
+<input type="text"
+       name="candidate_name"
+       value="{{ result.resume.name }}">
+<br><br>
+
+<p>Interview Date</p>
+<input type="datetime-local"
+       name="created_at"
+       value="{{ result.created_at|date:'Y-m-d\TH:i' }}">
+
+<br><br>
+
+    <p>Score</p>
+    <input type="number"
+       name="score"
+       value="{{ result.score }}"
+       required>
+    <p>Status</p>
+
+    <select name="status">
+
+        <option value="Selected"
+        {% if result.status == 'Selected' %}
+        selected
+        {% endif %}
+        >
+        Selected
+        </option>
+
+        <option value="Rejected"
+        {% if result.status == 'Rejected' %}
+        selected
+        {% endif %}
+        >
+        Rejected
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Update Result
+    </button>
+
+</form>
+
+</body>
+</html>
