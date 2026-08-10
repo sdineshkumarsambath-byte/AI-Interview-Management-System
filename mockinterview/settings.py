@@ -23,31 +23,20 @@ load_dotenv()
 
 
 # =========================================================
-# SECURITY
-# =========================================================
+## SECURITY
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = [
-    host.strip()
-    for host in os.getenv(
-        "ALLOWED_HOSTS",
-        "ai-interview-management-system-5.onrender.com"
-    ).split(",")
-    if host.strip()
-]
-
-
-# =========================================================
-# CSRF TRUSTED ORIGINS
-# =========================================================
+ALLOWED_HOSTS = os.getenv(
+    "ALLOWED_HOSTS",
+    "ai-interview-management-system-5.onrender.com"
+).split(",")
 
 CSRF_TRUSTED_ORIGINS = [
     "https://ai-interview-management-system-5.onrender.com",
 ]
-
 
 # =========================================================
 # APPLICATIONS
