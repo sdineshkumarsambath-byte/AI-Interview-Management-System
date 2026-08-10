@@ -1,0 +1,26 @@
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+env/
+venv/
+.venv/
+.venv-1/
+
+# Environment variables
+.env
+interview/.env
+
+# Database
+db.sqlite3
+
+# User uploaded files
+media/resumes/
+media/qr_*.png
+
+# IDE
+.vscode/
+*.code-workspace
+
+# Static generated files
+staticfiles/

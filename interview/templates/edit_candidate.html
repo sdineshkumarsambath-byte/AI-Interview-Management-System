@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Candidate</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+
+            /* Professional background */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+            url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+            color: white;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            width: 420px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        p {
+            margin: 10px 0 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 5px rgba(74,144,226,0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #357abd;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>✏️ Modify Candidate</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <p>Name</p>
+    <input type="text" name="name" value="{{ candidate.name }}">
+
+    <p>Email</p>
+    <input type="email" name="email" value="{{ candidate.email }}">
+
+    <p>Department</p>
+    <input type="text" name="department" value="{{ candidate.department }}">
+
+    <p>Skills</p>
+    <textarea name="skills">{{ candidate.skills }}</textarea>
+
+    <button type="submit">Update Candidate</button>
+</form>
+
+</body>
+</html>
