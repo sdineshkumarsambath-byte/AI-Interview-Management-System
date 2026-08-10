@@ -1,26 +1,49 @@
+# Python cache
 __pycache__/
 *.py[cod]
+*$py.class
 
-# Virtual environment
+# Virtual environments
 env/
 venv/
 .venv/
 .venv-1/
 
-# Environment variables
+# Environment variables / secrets
 .env
+.env.*
+!.env.example
 interview/.env
 
 # Database
 db.sqlite3
+*.sqlite3
 
 # User uploaded files
 media/resumes/
 media/qr_*.png
 
-# IDE
+# IDE / Editor
 .vscode/
+.idea/
 *.code-workspace
 
-# Static generated files
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Django generated static files
 staticfiles/
+
+# Python build / distribution
+build/
+dist/
+*.egg-info/
+
+# Test / coverage files
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Logs
+*.log
